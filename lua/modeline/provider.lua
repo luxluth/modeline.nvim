@@ -67,6 +67,21 @@ function M.progress()
   }
 end
 
+function M.macro()
+  return {
+    stl = function()
+      local reg = vim.fn.reg_recording()
+      if reg == '' then
+        return ''
+      end
+      return (' [RECORDING @%s] '):format(reg)
+    end,
+    name = 'Macro',
+    event = { 'RecordingEnter', 'RecordingLeave' },
+    attr = { link = 'WarningMsg' },
+  }
+end
+
 function M.lsp()
   return {
     stl = function(args)
